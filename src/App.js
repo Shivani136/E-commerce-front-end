@@ -5,14 +5,20 @@ import './App.css';
 import Home from './Container/Home';
 import Signin from './Container/Signin';
 import Signup from './Container/Signup';
-import PrivateRoute from './Component/HOC/PrivateRoute';
+import PrivateRoutes from './Component/HOC/PrivateRoutes';
 import { isUserLoggedIn } from '../src/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 
+// function PrivateOutlet() {
+//   const token = window.localStorage.getItem('token');
+//   return token ? <Outlet /> : <Navigate to="/signin" />;
+// }
+
 function App() {
   const dispatch = useDispatch();
   const auth = useSelector(state => state.auth)
+
   useEffect(() => {
     if (!auth.authenticate) {
       dispatch(isUserLoggedIn());
@@ -23,24 +29,22 @@ function App() {
   return (
     <div className="App">
 
-      <Router>
-        <Fragment>
-          <Routes>
-          <Route exact path='/' element={<PrivateRoute/>} />
-            <Route exact path='/' element={<Home />} />
-            {/* <PrivateRoute path="/" exact element={<Home />} /> */}
-            <Route path="/signin" element={<Signin />} />
-            <Route path="/signup" element={<Signup />} />
-          </Routes>
-        </Fragment>
-      </Router>
-
-
-
-      
-
-    </div>
+      <Routes>
+        <Route element={<PrivateRoutes />}>
+        <Route exact path='/' element={<Home />} />
+        <Route path='/signin' element={<Signin />} />
+        </Route>
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
+    </div >
   );
 }
 
 export default App;
+
+        {/* <Route path="/private-outlet" element={<PrivateOutlet />}>
+          {/* <Route element={<Private />} /> */}
+        {/* </Route>  */}
+
+     
+       

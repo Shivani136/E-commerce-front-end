@@ -8,18 +8,14 @@ import { authConstants } from '../../actions/constants';
 import { Navigate } from 'react-router-dom';
 
 const Signin = (props) => {
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const auth = useSelector(state => state.auth)
-
     const dispatch = useDispatch();
-
     
-    const userLogin = (e) => {
-
-        e.preventDefault();
+  const userLogin = (e) => {
+         e.preventDefault();
         const user = {
             email, password
             // email: "preeti@gmail.com",
