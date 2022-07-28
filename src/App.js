@@ -8,7 +8,8 @@ import Signup from './Container/Signup';
 import PrivateRoutes from './Component/HOC/PrivateRoutes';
 import { isUserLoggedIn } from '../src/actions';
 import { useDispatch, useSelector } from 'react-redux';
-
+import Products from './Container/Products';
+import Orders from './Container/Orders.js';
 
 // function PrivateOutlet() {
 //   const token = window.localStorage.getItem('token');
@@ -31,20 +32,29 @@ function App() {
 
       <Routes>
         <Route element={<PrivateRoutes />}>
-        <Route exact path='/' element={<Home />} />
-        <Route path='/signin' element={<Signin />} />
-        </Route>
+
+          <Route exact path='/' element={<Home />} />
+          <Route path='/signin' element={<Signin />} />
+          <Route path='/orders' element={< Orders />} />
+          <Route path='/products' element={<Products />} />
+          </Route>
         <Route path="/signup" element={<Signup />} />
       </Routes>
     </div >
   );
 }
 
+
 export default App;
 
-        {/* <Route path="/private-outlet" element={<PrivateOutlet />}>
-          {/* <Route element={<Private />} /> */}
-        {/* </Route>  */}
 
-     
-       
+
+
+
+
+
+
+
+
+
+

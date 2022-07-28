@@ -15,6 +15,7 @@ const Signup = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const auth = useSelector(state => state.auth)
+    const user = useSelector(state => state.user)
     const dispatch = useDispatch();
 
     const userSignup = (e) => {
@@ -33,11 +34,16 @@ const Signup = () => {
     if (auth.authenticate) {
         return <Navigate to={`/`} />
     }
+    if (user.loading) {
+        return <p>Loading ..</p>
+    }
+
 
     return (
         <div>
             <Layout>
                 <Container>
+                    {/* { user.message} */}
                     <Row style={{ marginTop: '50px' }}>
                         <Col md={{ span: 6, offset: 3 }}>
                             <Form onSubmit={userSignup}>
@@ -48,10 +54,7 @@ const Signup = () => {
                                             placeholder="Enter First name"
                                             value={firstName}
                                             type="text"
-                                            onChange={(e) => { setFirstName(e.target.value) }}
-                                            // onChange={(e) =>{setFirstName(e.target.value) }}
-
-                                        />
+                                            onChange={(e) => { setFirstName(e.target.value) }} />
                                     </Col>
                                     <Col md={{ span: 6 }}>
                                         <Input
@@ -59,9 +62,7 @@ const Signup = () => {
                                             placeholder="Enter Last name"
                                             value={lastName}
                                             type="text"
-                                            onChange={(e) => { setLastName(e.target.value)}}
-
-                                        />
+                                            onChange={(e) => { setLastName(e.target.value) }}/>
                                     </Col>
                                 </Row>
                                 <Input
@@ -69,17 +70,14 @@ const Signup = () => {
                                     placeholder="Enter Email"
                                     value={email}
                                     type="email"
-                                    onChange={(e) => { setEmail(e.target.value)}}
 
-                                />
+                                    onChange={(e) => { setEmail(e.target.value) }}/>
                                 <Input
                                     label="Password"
                                     placeholder="Enter Password"
                                     value={password}
                                     type="password"
-                                    onChange={(e) =>{ setPassword(e.target.value)}}
-
-                                />
+                                      onChange={(e) => { setPassword(e.target.value) }}/>
 
                                 <Button variant="primary" type="submit">
                                     Submit
